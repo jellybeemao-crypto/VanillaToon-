@@ -1,0 +1,33 @@
+/*
+  Vanilla Toon — تنظيم بيانات القصص والفصول.
+  ستُستخدم هذه الدوال عند ربط الموقع بقاعدة البيانات.
+*/
+
+window.VanillaToonData = {
+  normalizeStory(story) {
+    return {
+      id: story.id ?? null,
+      title: story.title ?? "قصة بلا عنوان",
+      description: story.description ?? "",
+      coverUrl: story.cover_url ?? "",
+      category: story.category ?? "أخرى",
+      author: story.author ?? "Vanilla Toon"
+    };
+  },
+
+  normalizeChapter(chapter) {
+    return {
+      id: chapter.id ?? null,
+      storyId: chapter.manhwa_id ?? null,
+      title: chapter.title ?? "فصل بلا عنوان",
+      number: chapter.chapter_number ?? 1,
+      content: chapter.content ?? ""
+    };
+  },
+
+  sortChapters(chapters) {
+    return [...chapters].sort(
+      (a, b) => Number(a.number) - Number(b.number)
+    );
+  }
+};
