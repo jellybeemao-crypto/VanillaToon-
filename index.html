@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff8fc">
+  <title>Vanilla Toon ✦ حكايات بطعم الفانيلا</title>
+  <meta name="description" content="اكتشفي عالم Vanilla Toon، حيث تعيش المانهوا والقصص والخيال.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink: #f2b9d4;
+      --purple: #9474bd;
+      --deep: #624b83;
+      --cream: #fff8fc;
+      --paper: #ffffff;
+      --text: #493c50;
+      --muted: #95879b;
+      --line: #f0e3ef;
+      --shadow: 0 10px 30px #74558012;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Cairo", sans-serif;
+      background: var(--cream);
+      color: var(--text);
+    }
+
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #fffafdf2;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--deep);
+      font-size: 22px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 39px;
+      border-radius: 14px;
+      background: linear-gradient(140deg, #f8d5e6, #e4d8f7);
+      color: #74538e;
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .navlinks a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 7px 10px;
+      border-radius: 12px;
+    }
+
+    .navlinks a:hover { background: #f5eaf8; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      max-width: 1120px;
+      margin: 28px auto 22px;
+      padding: 48px 26px;
+      border: 1px solid #f1dced;
+      border-radius: 28px;
+      background:
+        radial-gradient(ellipse at 10% 15%, #eddbf8 0, transparent 36%),
+        radial-gradient(ellipse at 95% 95%, #f9dce9 0, transparent 40%),
+        linear-gradient(120deg, #fff 5%, #fff7fb 100%);
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      margin: 10px 0;
+      font-size: clamp(30px, 6vw, 49px);
+      line-height: 1.5;
+      color: var(--deep);
+    }
+
+    .hero p {
+      margin: 0 auto 22px;
+      max-width: 530px;
+      color: #87758f;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .flower {
+      position: absolute;
+      color: #d5b9e8;
+      opacity: .6;
+      font-size: 36px;
+      pointer-events: none;
+    }
+
+    .flower.one { top: 18px; right: 22px; }
+    .flower.two { bottom: 12px; left: 24px; color: #e9b8d1; }
+    .flower.three { top: 24px; left: 13%; font-size: 23px; }
+
+    .search-wrap {
+      display: flex;
+      max-width: 590px;
+      margin: auto;
+      gap: 8px;
+    }
+
+    .search-wrap input {
+      min-width: 0;
+      flex: 1;
+      padding: 13px 16px;
+      border: 1px solid #e8d8ec;
+      border-radius: 15px;
+      background: white;
+      outline: none;
+      color: var(--text);
+    }
+
+    .search-wrap input:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px #9474bd20;
+    }
+
+    .primary {
+      border: 0;
+      border-radius: 14px;
+      background: var(--purple);
+      color: white;
+      padding: 12px 19px;
+      font-weight: 700;
+    }
+
+    .primary:hover { background: var(--deep); }
+
+    main {
+      max-width: 1120px;
+      margin: auto;
+      padding: 0 20px 45px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 30px 0 16px;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--deep);
+      font-size: 22px;
+    }
+
+    .section-note { color: var(--muted); font-size: 12px; }
+
+    .categories {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 23px;
+    }
+
+    .chip {
+      padding: 8px 15px;
+      border: 1px solid #eadced;
+      border-radius: 999px;
+      background: white;
+      color: #77657e;
+      font-size: 13px;
+    }
+
+    .chip.active, .chip:hover {
+      background: #eee4f7;
+      color: var(--deep);
+      border-color: #d7c3eb;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: white;
+      box-shadow: var(--shadow);
+      min-width: 0;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 32px #7455801c;
+    }
+
+    .cover {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 4 / 5;
+      background:
+        radial-gradient(circle at 20% 20%, #fff 0 3px, transparent 4px),
+        linear-gradient(145deg, #f7dceb, #e8def8 58%, #fdf3fa);
+      color: #9474bd;
+      font-size: 48px;
+      overflow: hidden;
+    }
+
+    .cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-body { padding: 13px; }
+
+    .card h3 {
+      font-size: 15px;
+      margin: 0 0 5px;
+      color: #574466;
+      overflow-wrap: anywhere;
+    }
+
+    .author {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0 0 10px;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 5px;
+      align-items: center;
+      color: #9a849f;
+      font-size: 11px;
+    }
+
+    .tag {
+      background: #f7edf8;
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+
+    .read-btn {
+      width: 100%;
+      margin-top: 12px;
+      border: 1px solid #e9d9ef;
+      border-radius: 11px;
+      padding: 8px;
+      color: var(--deep);
+      background: #fff9fe;
+      font-weight: 700;
+    }
+
+    .read-btn:hover { background: #f1e6f8; }
+
+    .status {
+      text-align: center;
+      padding: 32px 14px;
+      border: 1px dashed #dfcde7;
+      border-radius: 18px;
+      background: #fffdfd;
+      color: #8e7a96;
+      line-height: 2;
+      grid-column: 1 / -1;
+    }
+
+    .status strong {
+      display: block;
+      font-size: 18px;
+      color: var(--deep);
+    }
+
+    .about {
+      margin-top: 38px;
+      padding: 25px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(120deg, #fff, #fff4fa);
+      text-align: center;
+    }
+
+    .about p {
+      color: #8c7a92;
+      line-height: 2;
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 22px 15px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      color: #9b8aa0;
+      font-size: 12px;
+    }
+
+    .reader {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: none;
+      overflow-y: auto;
+      background: var(--cream);
+    }
+
+    .reader.open { display: block; }
+
+    .reader-bar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: #fffafdf2;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .reader-content {
+      max-width: 850px;
+      margin: 22px auto;
+      padding: 0 14px 40px;
+    }
+
+    .reader-content h2 { margin-bottom: 8px; }
+
+    .reader-description {
+      color: #8c7a92;
+      line-height: 2;
+      font-size: 14px;
+    }
+
+    .chapter-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .chapter-button {
+      text-align: right;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 14px;
+      background: white;
+      color: var(--deep);
+    }
+
+    .chapter-pages {
+      margin-top: 20px;
+      display: grid;
+      gap: 0;
+    }
+
+    .chapter-pages img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .close-btn {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 9px 13px;
+      color: var(--deep);
+      background: white;
+    }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .hero { margin: 17px 12px; padding: 36px 15px; border-radius: 22px; }
+      main { padding: 0 12px 30px; }
+      .nav { padding: 10px 13px; }
+      .brand { font-size: 19px; }
+      .navlinks { width: 100%; justify-content: center; }
+      .navlinks a { font-size: 12px; }
+      .search-wrap { flex-direction: column; }
+      .search-wrap .primary { width: 100%; }
+      h2 { font-size: 20px; }
+    }
+
+    @media (max-width: 350px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="#" aria-label="Vanilla Toon الرئيسية">
+        <span class="brand-mark">✿</span>
+        <span>Vanilla Toon <small>✦</small></span>
+      </a>
+      <div class="navlinks">
+        <a href="#home">الرئيسية</a>
+        <a href="#library">اكتشفي المانهوا</a>
+        <a href="#about">عن فانيلا تون</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <span class="flower one">✿</span>
+    <span class="flower two">❀</span>
+    <span class="flower three">✧</span>
+    <div class="eyebrow">✦ حكايات مرسومة بالخيال ✦</div>
+    <h1>عالمكِ، حكاياتكِ</h1>
+    <p>
+      أهلاً بكِ في Vanilla Toon، مساحة تجمع المانهوا الأصلية
+      والرسومات والقصص التي تنبض بالخيال.
+    </p>
+    <form class="search-wrap" id="searchForm">
+      <input id="searchInput" type="search"
+        placeholder="ابحثي عن مانهوا أو مؤلف..."
+        aria-label="ابحثي عن مانهوا أو مؤلف">
+      <button class="primary" type="submit">بحث ✧</button>
+    </form>
+  </section>
+
+  <main>
+    <section id="library">
+      <div class="section-head">
+        <h2>✿ مكتبة الحكايات</h2>
+        <span class="section-note" id="storyCount">جارٍ تحميل القصص...</span>
+      </div>
+
+      <div class="categories" id="categories">
+        <button class="chip active" data-category="الكل">الكل</button>
+        <button class="chip" data-category="فانتازيا">فانتازيا</button>
+        <button class="chip" data-category="كوميديا">كوميديا</button>
+        <button class="chip" data-category="مغامرة">مغامرة</button>
+        <button class="chip" data-category="رومانسية">رومانسية</button>
+        <button class="chip" data-category="دراما">دراما</button>
+        <button class="chip" data-category="غموض">غموض</button>
+        <button class="chip" data-category="أخرى">أخرى</button>
+      </div>
+
+      <div class="grid" id="storyGrid">
+        <div class="status">
+          <strong>✧ لحظة صغيرة ✧</strong>
+          يجري الاتصال بمكتبة الحكايات...
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <h2>عن Vanilla Toon ✿</h2>
+      <p>
+        حكايات بطعم الفانيلا؛ عالم صغير للمانهوا الأصلية
+        والرسومات والشخصيات التي تستحق أن تُروى قصصها.
+      </p>
+      <span class="eyebrow">Made with ♡ for stories</span>
+    </section>
+  </main>
+
+  <footer>
+    Vanilla Toon ✦ حكايات بطعم الفانيلا
+    <br>جميع الحقوق محفوظة لأصحاب أعمالهم.
+  </footer>
+
+  <section class="reader" id="reader" aria-label="قارئ المانهوا">
+    <div class="reader-bar">
+      <strong>Vanilla Toon ✿</strong>
+      <button class="close-btn" id="closeReader">إغلاق ✕</button>
+    </div>
+    <div class="reader-content" id="readerContent"></div>
+  </section>
+
+  <!-- إعدادات Supabase: أضيفي بيانات المشروع العامة هنا -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "ضعي_رابط_مشروعك_هنا";
+    const SUPABASE_ANON_KEY = "ضعي_مفتاح_publishable_أو_anon_هنا";
+
+    let db = null;
+    let stories = [];
+    let activeCategory = "الكل";
+    let searchTerm = "";
+
+    const grid = document.getElementById("storyGrid");
+    const count = document.getElementById("storyCount");
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;",
+        '"': "&quot;", "'": "&#39;"
+      })[char]);
+    }
+
+    function showStatus(title, message) {
+      grid.innerHTML = `<div class="status">
+        <strong>${escapeHTML(title)}</strong>
+        ${escapeHTML(message)}
+      </div>`;
+    }
+
+    function getCategory(story) {
+      return story.category || story.genre || "أخرى";
+    }
+
+    function getAuthor(story) {
+      return story.author || story.author_name || "مؤلفة فانيلا تون";
+    }
+
+    function getCover(story) {
+      return story.cover_url || story.cover || "";
+    }
+
+    function renderStories() {
+      const filtered = stories.filter(story => {
+        const matchesCategory = activeCategory === "الكل" ||
+          getCategory(story) === activeCategory;
+
+        const searchable = [
+          story.title, getAuthor(story), getCategory(story)
+        ].join(" ").toLocaleLowerCase();
+
+        return matchesCategory &&
+          searchable.includes(searchTerm.toLocaleLowerCase());
+      });
+
+      count.textContent = `${filtered.length} قصة`;
+
+      if (!filtered.length) {
+        showStatus(
+          searchTerm ? "لم نعثر على هذه الحكاية" : "المكتبة هادئة الآن",
+          searchTerm
+            ? "جرّبي البحث بعنوان آخر أو باسم المؤلفة."
+            : "لا توجد قصص منشورة للعامة في قاعدة البيانات حتى الآن."
+        );
+        return;
+      }
+
+      grid.innerHTML = filtered.map((story, index) => {
+        const cover = getCover(story);
+        const title = escapeHTML(story.title || "حكاية بلا عنوان");
+        const author = escapeHTML(getAuthor(story));
+        const category = escapeHTML(getCategory(story));
+
+        return `<article class="card">
+          <div class="cover">
+            ${cover
+              ? `<img src="${escapeHTML(cover)}" alt="غلاف ${title}" loading="lazy">`
+              : "✿"}
+          </div>
+          <div class="card-body">
+            <h3>${title}</h3>
+            <p class="author">بقلم ${author}</p>
+            <div class="meta">
+              <span class="tag">${category}</span>
+              <span>مانهوا ✧</span>
+            </div>
+            <button class="read-btn" data-open="${index}">
+              اكتشفي الحكاية ←
+            </button>
+          </div>
+        </article>`;
+      }).join("");
+
+      grid.querySelectorAll("[data-open]").forEach(button => {
+        button.addEventListener("click", () => {
+          openStory(filtered[Number(button.dataset.open)]);
+        });
+      });
+    }
+
+    async function openStory(story) {
+      const reader = document.getElementById("reader");
+      const content = document.getElementById("readerContent");
+
+      reader.classList.add("open");
+      content.innerHTML = `<h2>${escapeHTML(story.title)}</h2>
+        <p class="reader-description">${escapeHTML(story.description || "مرحباً بكِ في هذه الحكاية.")}</p>
+        <div class="status">يجري تحميل الفصول...</div>`;
+
+      if (!db) {
+        content.innerHTML += `<p class="reader-description">لم يتم إعداد الاتصال بقاعدة البيانات بعد.</p>`;
+        return;
+      }
+
+      try {
+        const { data, error } = await db.from("chapters")
+          .select("*")
+          .eq("manhwa_id", story.id)
+          .order("chapter_number", { ascending: true });
+
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+          content.innerHTML += `<div class="status">لا توجد فصول منشورة لهذه القصة بعد.</div>`;
+          return;
+        }
+
+        const list = document.createElement("div");
+        list.className = "chapter-list";
+
+        data.forEach(chapter => {
+          const button = document.createElement("button");
+          button.className = "chapter-button";
+          button.textContent = `الفصل ${chapter.chapter_number}: ${chapter.title || ""}`;
+          button.addEventListener("click", () => {
+            let pages = [];
+            try {
+              const parsed = JSON.parse(chapter.content || "[]");
+              if (Array.isArray(parsed)) pages = parsed;
+            } catch (_) {}
+
+            const pageArea = document.createElement("div");
+            pageArea.className = "chapter-pages";
+
+            if (pages.length && pages.every(page =>
+              typeof page === "string" && /^https:\/\//i.test(page))) {
+              pages.forEach(url => {
+                const img = document.createElement("img");
+                img.src = url;
+                img.alt = "صفحة من المانهوا";
+                img.loading = "lazy";
+                pageArea.appendChild(img);
+              });
+            } else {
+              pageArea.textContent = chapter.content || "محتوى هذا الفصل غير متاح للعرض كصور.";
+            }
+
+            content.querySelector(".chapter-pages")?.remove();
+            content.appendChild(pageArea);
+            pageArea.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+          list.appendChild(button);
+        });
+
+        content.appendChild(list);
+      } catch (error) {
+        content.innerHTML += `<div class="status">
+          تعذّر تحميل الفصول. تحققي من إعدادات قاعدة البيانات وصلاحيات القراءة.
+        </div>`;
+        console.error(error);
+      }
+    }
+
+    document.getElementById("closeReader").addEventListener("click", () => {
+      document.getElementById("reader").classList.remove("open");
+    });
+
+    document.getElementById("searchForm").addEventListener("submit", event => {
+      event.preventDefault();
+      searchTerm = document.getElementById("searchInput").value.trim();
+      renderStories();
+      document.getElementById("library").scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("searchInput").addEventListener("input", event => {
+      searchTerm = event.target.value.trim();
+      renderStories();
+    });
+
+    document.getElementById("categories").addEventListener("click", event => {
+      const button = event.target.closest("[data-category]");
+      if (!button) return;
+
+      activeCategory = button.dataset.category;
+      document.querySelectorAll(".chip").forEach(chip => {
+        chip.classList.toggle("active", chip === button);
+      });
+      renderStories();
+    });
+
+    async function loadStories() {
+      if (!window.supabase ||
+          SUPABASE_URL === "ضعي_رابط_مشروعك_هنا" ||
+          SUPABASE_ANON_KEY === "ضعي_مفتاح_publishable_أو_anon_هنا") {
+        count.textContent = "لم يُربط المصدر بعد";
+        showStatus(
+          "أهلاً بكِ في Vanilla Toon ✿",
+          "التصميم جاهز. يجب إعداد بيانات الاتصال الآمنة بقاعدة Supabase لعرض القصص المنشورة."
+        );
+        return;
+      }
+
+      try {
+        db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        const { data, error } = await db.from("manhwa")
+          .select("*")
+          .eq("visibility", "public")
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        stories = data || [];
+        renderStories();
+      } catch (error) {
+        count.textContent = "تعذّر الاتصال";
+        showStatus(
+          "لم نستطع تحميل المكتبة",
+          "قد تحتاج قاعدة البيانات إلى مراجعة أسماء الأعمدة وسياسات القراءة العامة."
+        );
+        console.error(error);
+      }
+    }
+
+    loadStories();
+  </script>
+</body>
+  </html>
+  
