@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قراءة المانهوا | Vanilla Toon</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .reader-page {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 18px;
+    }
+
+    .reader-heading {
+      text-align: center;
+      padding: 25px 10px;
+    }
+
+    .chapter-controls {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .chapter-controls a,
+    .reader-button {
+      padding: 9px 16px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--surface);
+      color: var(--purple-dark);
+    }
+
+    .chapter-images {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      overflow: hidden;
+      background: var(--surface);
+      border-radius: 12px;
+    }
+
+    .chapter-images img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .reader-empty {
+      width: 100%;
+      padding: 70px 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .reader-note {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      background: var(--bg);
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html">Vanilla Toon ✦</a>
+    <a href="index.html">المكتبة</a>
+  </header>
+
+  <main class="reader-page">
+    <section class="reader-heading">
+      <p class="eyebrow">✧ مساحة القراءة ✧</p>
+      <h1 id="story-title">عنوان المانهوا</h1>
+      <h2 id="chapter-title">الفصل الأول</h2>
+    </section>
+
+    <nav class="chapter-controls" aria-label="التنقل بين الفصول">
+      <a href="#" id="previous-chapter">← الفصل السابق</a>
+      <a href="#" id="next-chapter">الفصل التالي →</a>
+    </nav>
+
+    <section id="chapter-images" class="chapter-images">
+      <div class="reader-empty">
+        <h3>مرحبًا بكِ في عالم الحكاية ♡</h3>
+        <p>ستظهر صفحات الفصل هنا بعد إضافة الفصل وربطه بالموقع.</p>
+      </div>
+    </section>
+
+    <p class="reader-note">
+      يمكنكِ قراءة صفحات الفصل متتابعة بالتمرير إلى الأسفل.
+      سيُفعّل تحميل الفصول والتنقل بينها بعد ربط قاعدة البيانات.
+    </p>
+
+    <div class="chapter-controls">
+      <a href="#" id="previous-bottom">← الفصل السابق</a>
+      <a href="index.html">العودة إلى المكتبة</a>
+      <a href="#" id="next-bottom">الفصل التالي →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>Vanilla Toon ✦ حكايات بطعم الفانيلا</p>
+  </footer>
+</body>
+                                  </html>
+      
